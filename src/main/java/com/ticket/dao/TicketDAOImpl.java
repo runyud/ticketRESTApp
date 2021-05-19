@@ -30,6 +30,7 @@ public class TicketDAOImpl implements TicketDAO {
 	public void saveTicket(Ticket ticket) {
 		Session session = sessionFactory.getCurrentSession();
 		// save or update the ticket
+		System.out.println("ticket id is " + ticket.getTicketId());
 		session.saveOrUpdate(ticket);
 	}
 
@@ -46,21 +47,6 @@ public class TicketDAOImpl implements TicketDAO {
 		Query<Ticket> query = session.createQuery("delete from Ticket where ticketId=:id");
 		query.setParameter("id", id);
 		query.executeUpdate();
-	}
-
-	@Override
-	public List<Ticket> searchTickets(String searchEvent) {
-		Session session = sessionFactory.getCurrentSession();
-		Query<Ticket> query = null;
-		if(searchEvent != null && searchEvent.trim().length() > 0) {
-			query = session.createQuery("from Ticket where lower(eventName) like :searchEvent", Ticket.class);
-			query.setParameter("searchEvent", "%" + searchEvent.toLowerCase() + "%");
-		} else {
-			// search event is empty so get all tickets
-			query = session.createQuery("from Ticket", Ticket.class);
-		}
-		
-		return query.getResultList();
 	}
 
 }

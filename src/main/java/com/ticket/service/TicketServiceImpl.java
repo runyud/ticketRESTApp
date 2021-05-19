@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ticket.dao.EventDAO;
 import com.ticket.dao.TicketDAO;
+import com.ticket.entity.Event;
 import com.ticket.entity.Ticket;
 
 @Service
@@ -15,6 +17,9 @@ public class TicketServiceImpl implements TicketService {
 	// Inject DAO
 	@Autowired
 	private TicketDAO ticketDAO;
+	
+	@Autowired
+	private EventDAO eventDAO;
 
 	@Override
 	@Transactional
@@ -39,11 +44,37 @@ public class TicketServiceImpl implements TicketService {
 	public void deleteTicket(int id) {
 		ticketDAO.deleteTicket(id);
 	}
+	
+	@Override
+	@Transactional
+	public List<Event> getEvents() {
+		return eventDAO.getEvents();
+	}
 
 	@Override
 	@Transactional
-	public List<Ticket> searchTickets(String searchEvent) {
-		return ticketDAO.searchTickets(searchEvent);
+	public List<Ticket> getTickets(int eventId) {
+		return eventDAO.getTickets(eventId);
 	}
+
+	@Override
+	@Transactional
+	public Event getEvent(int eventId) {
+		return eventDAO.getEvent(eventId);
+	}
+
+	@Override
+	@Transactional
+	public void deleteEvent(int eventId) {
+		eventDAO.deleteEvent(eventId);
+	}
+	
+	@Override
+	@Transactional
+	public List<Ticket> searchTickets(String searchEvent) {
+		return eventDAO.searchTickets(searchEvent);
+	}
+
+	
 
 }

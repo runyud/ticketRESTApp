@@ -14,5 +14,4 @@ public interface TicketDAO {
 
 	public void deleteTicket(int id);
 
-	public List<Ticket> searchTickets(String searchEvent);
 }
