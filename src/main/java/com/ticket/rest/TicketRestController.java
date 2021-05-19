@@ -92,6 +92,7 @@ public class TicketRestController {
 	}
 	
 	// DELETE delete an event 
+	// TODO: not working as of now 
 	@DeleteMapping("/events/{eventId}")
 	public String deleteEvent(@PathVariable int eventId) {
 		Event event = ticketService.getEvent(eventId);
