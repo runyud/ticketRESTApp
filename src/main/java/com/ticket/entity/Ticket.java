@@ -50,10 +50,13 @@ public class Ticket {
 
 	@Column(name = "status_active")
 	private String status;
-
+	
+	@Column(name = "event_id", insertable = true, updatable = true)
+	private int eventId;
+	
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
 			CascadeType.REFRESH })
-	@JoinColumn(name = "event_id", insertable = true, updatable = true, nullable = true)
+	@JoinColumn(name = "event_id", insertable = false, updatable = false, nullable = true)
 	@JsonIgnore
 	private Event event;
 
@@ -154,6 +157,15 @@ public class Ticket {
 
 	public void setEvent(Event event) {
 		this.event = event;
+	}
+	
+	
+	public int getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(int eventId) {
+		this.eventId = eventId;
 	}
 
 	@Override

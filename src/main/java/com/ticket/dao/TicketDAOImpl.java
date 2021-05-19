@@ -30,7 +30,6 @@ public class TicketDAOImpl implements TicketDAO {
 	public void saveTicket(Ticket ticket) {
 		Session session = sessionFactory.getCurrentSession();
 		// save or update the ticket
-		System.out.println("ticket id is " + ticket.getTicketId());
 		session.saveOrUpdate(ticket);
 	}
 
